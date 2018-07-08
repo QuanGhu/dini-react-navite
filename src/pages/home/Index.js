@@ -7,7 +7,7 @@ class Index extends Component {
   render() {
     return (
       <Container>
-        <Headermenu title="Dini Shop" navcart={ () => this.props.navigation.navigate('Cartpage') }/>
+        <Headermenu title="Dini Shop" nav={ () => this.props.navigation.navigate('Profilepage') } navcart={ () => this.props.navigation.navigate('Cartpage') } icon="ios-contact"/>
         <Content style={{ padding : 20}}>
           <CategoryList nav={this.props.navigation}/>
         </Content>
