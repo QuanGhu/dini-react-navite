@@ -1,0 +1,3 @@
+rootProject.name = 'dini_shop'
+
+include ':app'
