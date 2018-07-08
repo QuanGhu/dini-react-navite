@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from './pages/home/Index';
 import Product from './pages/product/Index';
+import Cart from './pages/cart/Index';
 import ProductDetail from './pages/product/Detail';
 import { StackNavigator } from 'react-navigation';
 
@@ -8,7 +9,8 @@ const RootNav = StackNavigator(
     {
         Homepage : Home,
         Productpage : Product,
-        Productdetailpage : ProductDetail
+        Productdetailpage : ProductDetail,
+        Cartpage : Cart
     },
     {
         initialRouteName: 'Homepage',

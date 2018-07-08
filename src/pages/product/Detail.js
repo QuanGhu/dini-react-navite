@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
 import { Image, Dimensions, Text, View } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Content} from 'native-base';
+import { Container, Button, Content} from 'native-base';
+import Headermenu from '../component/HeaderComponent';
 
 class Detail extends Component {
     render() {
         return (
             <Container>
-                <Header>
-                <Left>
-                    <Button transparent onPress={ () => this.props.navigation.goBack() }>
-                        <Icon name='arrow-back' />
-                    </Button>
-                </Left>
-                <Body>
-                    <Title>Product Detail Page</Title>
-                </Body>
-                <Right>
-                    <Button transparent>
-                        <Icon name='search' />
-                    </Button>
-                    <Button transparent>
-                        <Icon name='ios-cart' />
-                    </Button>
-                </Right>
-                </Header>
+                <Headermenu title="Dummy Produk" icon="arrow-back" nav={ () => this.props.navigation.goBack()} navcart={ () => this.props.navigation.navigate('Cartpage') }/>
                 <Content>
                     <Image
                         source={{uri: 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'}}

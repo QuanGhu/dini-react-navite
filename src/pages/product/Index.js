@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Content } from 'native-base';
+import { Container, Content } from 'native-base';
 import ListingProduct from './List';
+import Headermenu from '../component/HeaderComponent';
 
 class Index extends Component {
     render() {
         return (
             <Container>
-                <Header>
-                <Left>
-                    <Button transparent onPress={ () => this.props.navigation.goBack() }>
-                        <Icon name='arrow-back' />
-                    </Button>
-                </Left>
-                <Body>
-                    <Title>Product Page</Title>
-                </Body>
-                <Right>
-                    <Button transparent>
-                        <Icon name='search' />
-                    </Button>
-                    <Button transparent>
-                        <Icon name='ios-cart' />
-                    </Button>
-                </Right>
-                </Header>
+                <Headermenu title="Produk Page" icon="arrow-back" nav={ () => this.props.navigation.goBack()} navcart={ () => this.props.navigation.navigate('Cartpage') }/>
                 <Content style={{ padding : 20}}>
                     <ListingProduct nav={this.props.navigation}/>
                 </Content>

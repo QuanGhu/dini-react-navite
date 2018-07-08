@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Content } from 'native-base';
+import { Container, Content } from 'native-base';
 import CategoryList from '../category/Index';
+import Headermenu from '../component/HeaderComponent';
 
 class Index extends Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name='ios-menu' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Dini Shop</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon name='search' />
-            </Button>
-            <Button transparent>
-              <Icon name='ios-cart' />
-            </Button>
-          </Right>
-        </Header>
+        <Headermenu title="Dini Shop" navcart={ () => this.props.navigation.navigate('Cartpage') }/>
         <Content style={{ padding : 20}}>
           <CategoryList nav={this.props.navigation}/>
         </Content>
