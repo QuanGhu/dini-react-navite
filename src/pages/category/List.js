@@ -1,41 +1,21 @@
 import React, { Component } from 'react';
 import { Card, CardItem, Body, Text, Root} from 'native-base';
-
-const data = [
-    {
-        'id' : '1',
-        'name' : 'Celana',
-        'description' : 'Celana Berkualitas International'
-    },
-    {
-        'id' : '2',
-        'name' : 'Baju',
-        'description' : 'Baju Berkualitas International'
-    },
-    {
-        'id' : '3',
-        'name' : 'Sepatu',
-        'description' : 'Sepatu Berkualitas International'
-    },
-    {
-        'id' : '4',
-        'name' : 'Jaket',
-        'description' : 'Jaket Jaket Korea'
-    },
-    {
-        'id' : '5',
-        'name' : 'Topi',
-        'description' : 'Topi Saya Bundar'
-    }
-]
+import { View , ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
+import { getList } from '../../action/category';
+import { getNoAuth } from '../../config/fetch';
 
 class List extends Component {
 
+    componentWillMount()
+    {
+        this.props.getCategoriesData();
+    }
     _renderList = () => {
-        return data.map((category) => {
+        return this.props.categories.map((category) => {
             return (
                 <Card key={category.id} style={{paddingTop : 25, paddingBottom : 25}}>
-                    <CardItem button onPress={() => this.props.nav.navigate('Productpage') }>
+                    <CardItem button onPress={() => this.props.nav.navigate('Productpage', { id : category.id }) }>
                         <Body style={{ alignContent : 'center', justifyContent : 'center' , alignItems : 'center'}}>
                             <Text style = {{fontWeight : 'bold', fontSize : 20}}>
                                 {category.name}
@@ -53,10 +33,41 @@ class List extends Component {
     render(){
         return (
             <Root>
-                {this._renderList()}
+                {!this.props.categories ? 
+                    <View style={{flex : 1, justifyContent : 'center', alignItems: 'center'}}> 
+                        <ActivityIndicator size="large" color="#f75400" />
+                    </View>
+                : this._renderList() }
             </Root>
         )
     }
 }
 
-export default List
+const mapStateToProps = state => {
+    return {
+        categories : state.categories
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getCategoriesData: () => {
+            getNoAuth('categories')
+            .then((response) => response.json())
+            .then(async (responseData) => {
+                console.log(responseData)
+                if(responseData.status)
+                {
+                    dispatch(getList(responseData.data))
+                } else {
+                    console.log('something error')      
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        },
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(List)
