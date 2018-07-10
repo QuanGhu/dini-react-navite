@@ -6,6 +6,7 @@ import Profile from './pages/profile/Index';
 import ProductDetail from './pages/product/Detail';
 import Register from './pages/profile/Register';
 import Reset from './pages/profile/Reset';
+import Login from './pages/profile/Login';
 import { StackNavigator } from 'react-navigation';
 
 const RootNav = StackNavigator(
@@ -16,7 +17,8 @@ const RootNav = StackNavigator(
         Cartpage : Cart,
         Profilepage : Profile,
         Registerpage : Register,
-        Resetpage : Reset
+        Resetpage : Reset,
+        Loginpage : Login
     },
     {
         initialRouteName: 'Homepage',

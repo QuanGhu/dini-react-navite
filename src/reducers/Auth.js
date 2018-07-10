@@ -1,8 +1,10 @@
 const default_state = {
-    application_key : 'sUK@NG%4JuqcjVDmBzjxx9NzK',
+    fullname : '',
     email : '',
     password : '',
-    loading : false
+    role_id : '3',
+    loading : false,
+    token : ''
 }
 
 export default (state = default_state, action) => {
@@ -11,8 +13,16 @@ export default (state = default_state, action) => {
             return { ...state, email : action.data }
         case 'password_changed' :
             return { ...state, password : action.data }
+        case 'name_changed' :
+            return { ...state, fullname : action.data }
+        case 'register_process' :
+            return { ...state, loading :true }
+        case 'register_done' : 
+            return { ...state, loading : false }
         case 'login_process' :
             return { ...state, loading :true }
+        case 'save_token' :
+            return {...state, token : action.data}
         case 'login_done' : 
             return { ...state, loading : false }
         default:
