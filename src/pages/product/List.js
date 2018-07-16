@@ -1,60 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, FlatList, Text, View, Image, ActivityIndicator} from 'react-native';
+import { FlatList, Text, View, Image, ActivityIndicator} from 'react-native';
 import { Card, CardItem , Body } from 'native-base';
 import { getList } from '../../action/product';
 import { connect } from 'react-redux';
 import { getNoAuth } from '../../config/fetch';
-
-const productData = [
-    {
-        'id' : '1',
-        'name' : 'Dummy Product',
-        'price' : 'Rp 75.000',
-        'image' : 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'
-    },
-    {
-        'id' : '2',
-        'name' : 'Dummy Product',
-        'price' : 'Rp 75.000',
-        'image' : 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'
-    },
-    {
-        'id' : '3',
-        'name' : 'Dummy Product',
-        'price' : 'Rp 75.000',
-        'image' : 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'
-    },
-    {
-        'id' : '4',
-        'name' : 'Dummy Product',
-        'price' : 'Rp 75.000',
-        'image' : 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'
-    },
-    {
-        'id' : '5',
-        'name' : 'Dummy Product',
-        'price' : 'Rp 75.000',
-        'image' : 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'
-    },
-    {
-        'id' : '6',
-        'name' : 'Dummy Product',
-        'price' : 'Rp 75.000',
-        'image' : 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'
-    },
-    {
-        'id' : '7',
-        'name' : 'Dummy Product',
-        'price' : 'Rp 75.000',
-        'image' : 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'
-    },
-    {
-        'id' : '8',
-        'name' : 'Dummy Product',
-        'price' : 'Rp 75.000',
-        'image' : 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'
-    }
-]
 
 class List extends Component {
     componentWillMount() 
@@ -77,7 +26,7 @@ class List extends Component {
                                 <Body style={{ alignContent : 'center', justifyContent : 'center' , alignItems : 'center'}}>
                                     <Image
                                         style={{width: 125, height: 125}}
-                                        source={{uri: 'https://lepetitsociety.com/pub/media/catalog/product/cache/image/1200x1200/e9c3970ab036de70892d86c6d221abfe/j/a/janod-abc-buggy-walking-trolley-01_large.jpg'}}
+                                        source={{uri: item.image }}
                                     />
                                 </Body>
                             </CardItem>

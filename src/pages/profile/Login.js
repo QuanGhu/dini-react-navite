@@ -3,6 +3,7 @@ import { View, Text, AsyncStorage, ActivityIndicator} from 'react-native';
 import { Button, Item, Input, Container, Toast} from 'native-base';
 import Entypoicons from 'react-native-vector-icons/Entypo';
 import { emailChanged, passwordChanged , doLogin, loginDone, saveToken } from '../../action/login';
+import { userLogin } from '../../action/profile';
 import { connect } from 'react-redux';
 import { postNoAuth } from '../../config/fetch';
 
@@ -107,9 +108,9 @@ const mapDispatchToProps = (dispatch) => {
             return postNoAuth(data, 'login')
             .then((response) => response.json())
             .then((responseData) => {
-                console.log(responseData)
                 if(responseData.success) {
-                    dispatch (saveToken(responseData.token))
+                    this._signInAsync(responseData.token)
+                    dispatch (userLogin())
                 } else {
                     this.showNotification(responseData.message,"OK","top","danger")
                 }

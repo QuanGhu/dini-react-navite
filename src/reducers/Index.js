@@ -3,10 +3,14 @@ import Auth from './Auth';
 import Category from './Category';
 import Product from './Product';
 import ProductDetail from './ProductDetail';
+import Profile from './Profile';
+import Cart from './Cart';
 
 export default combineReducers ({
     auth : Auth,
     categories : Category,
     products : Product,
-    productdetail : ProductDetail
+    productdetail : ProductDetail,
+    profiledata : Profile,
+    cart : Cart
 })

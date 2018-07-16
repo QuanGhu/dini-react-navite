@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Header, Left, Button, Icon, Body, Title , Right } from 'native-base';
+import { Header, Left, Button, Icon, Body, Title , Right, Badge, Text } from 'native-base';
+import { connect } from 'react-redux';
 
 class HeaderComponent extends Component {
     render() {
@@ -17,7 +18,7 @@ class HeaderComponent extends Component {
                     <Button transparent>
                         <Icon name='search' />
                     </Button>
-                    <Button transparent onPress={this.props.navcart}>
+                    <Button transparent badge onPress={this.props.profiledata.login ? this.props.navcart : null }>
                         <Icon name='ios-cart' />
                     </Button>
                 </Right>
@@ -26,4 +27,11 @@ class HeaderComponent extends Component {
     }
 }
 
-export default HeaderComponent
+const mapStateToProps = state => {
+    return {
+        profiledata : state.profiledata,
+    }
+}
+
+
+export default connect(mapStateToProps)(HeaderComponent)
