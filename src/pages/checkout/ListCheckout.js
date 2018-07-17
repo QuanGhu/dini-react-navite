@@ -53,11 +53,11 @@ class ListCheckout extends Component {
                     </View>
                     <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 15}}>
                         <Text style={{fontWeight : 'bold'}}>Nama</Text>
-                        <Text>Ari Putra</Text>
+                        <Text>{this.props.profiledata.profile.fullname}</Text>
                     </View>
                     <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 5}}>
                         <Text style={{fontWeight : 'bold'}}>Alamat</Text>
-                        <Text>Rp 1234567</Text>
+                        <Text>{this.props.profiledata.profile.address}</Text>
                     </View>
                 </View>
             :
@@ -75,7 +75,8 @@ class ListCheckout extends Component {
 
 const mapStateToProps = state => {
     return {
-        cart : state.cart
+        cart : state.cart,
+        profiledata : state.profiledata,
     }
 }
 
