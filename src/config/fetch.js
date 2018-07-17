@@ -60,3 +60,15 @@ export const put = async (body, API) => {
     })
 }
 
+export const remove = async (body, API) => {
+    var token = await AsyncStorage.getItem('token');
+    return fetch(API_URL + API, {
+        method : 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : token
+        },
+        body : body
+    })
+}
+

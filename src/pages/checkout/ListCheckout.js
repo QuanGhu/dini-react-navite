@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View } from 'react-native';
 import { List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { getCartList } from '../../action/cart';
 import { get, remove } from '../../config/fetch';
 
-class ListCart extends Component {
+class ListCheckout extends Component {
     componentWillMount()
     {
         this.props.getCartList();
@@ -19,7 +19,6 @@ class ListCart extends Component {
     }
 
   render() {
-      console.log(this.props.cart)
     return (
         <View>
             {this.props.cart ? 
@@ -49,6 +48,21 @@ class ListCart extends Component {
                     <Text> Keranjang Belanja Kosong </Text>
                 </View>
             }
+            <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15}}>
+                <Text style={{fontWeight : 'bold'}}>Total</Text>
+                <Text>Rp 1234567</Text>
+            </View>
+            <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 25}}>
+                <Text style={{fontWeight : 'bold'}}>Detail Pemesan</Text>
+            </View>
+            <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 15}}>
+                <Text style={{fontWeight : 'bold'}}>Nama</Text>
+                <Text>Ari Putra</Text>
+            </View>
+            <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 5}}>
+                <Text style={{fontWeight : 'bold'}}>Alamat</Text>
+                <Text>Rp 1234567</Text>
+            </View>
         </View>
     );
   }
@@ -104,4 +118,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ListCart)
+export default connect(mapStateToProps,mapDispatchToProps)(ListCheckout)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Listcart from './ListCart';
+import Listcheckout from './ListCheckout';
 import { Container, Content, Button, Text } from 'native-base';
 import Headermenu from '../component/HeaderComponent';
 
@@ -9,9 +9,9 @@ class Index extends Component {
             <Container>
                 <Headermenu title="Keranjang Belanja" icon="arrow-back" nav={ () => this.props.navigation.goBack()} navcart={ () => this.props.navigation.navigate('Cartpage') }/>
                 <Content>
-                    <Listcart />
-                    <Button block style={{marginTop : 15, marginBottom: 15}} onPress={() => this.props.navigation.navigate('Checkoutpage')}>
-                        <Text style={{fontWeight : 'bold', color : '#fff'}}>Lanjutkan Pembayaran</Text>
+                    <Listcheckout />
+                    <Button block style={{marginTop : 15, marginBottom: 15}}>
+                        <Text style={{fontWeight : 'bold', color : '#fff'}}>Bayar</Text>
                     </Button>
                 </Content>
             </Container>
