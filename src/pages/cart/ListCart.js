@@ -24,7 +24,7 @@ class ListCart extends Component {
         <View>
             {this.props.cart ? 
                 <List>
-                    {this.props.cart.map((data) => {
+                    {this.props.cart.data.map((data) => {
                         return (
                             <ListItem thumbnail key={data.id}>
                                 <Left>
@@ -32,7 +32,7 @@ class ListCart extends Component {
                                 </Left>
                                 <Body>
                                     <Text>{data.product.name}</Text>
-                                    <Text note numberOfLines={1}>{data.total_price_per_product}</Text>
+                                    <Text note numberOfLines={1}>{data.total_price}</Text>
                                     <Text note numberOfLines={1}>Qty : {data.qty}</Text>
                                 </Body>
                                 <Right>
@@ -69,7 +69,7 @@ const mapDispatchToProps = (dispatch) => {
             .then((response) => response.json())
             .then((responseData) => {
                 if(responseData.status) {
-                    dispatch(getCartList(responseData.data))
+                    dispatch(getCartList(responseData))
                 }
             })
             .catch((error) => {
@@ -87,7 +87,7 @@ const mapDispatchToProps = (dispatch) => {
                     .then((response) => response.json())
                     .then((responseData) => {
                         if(responseData.status) {
-                            dispatch(getCartList(responseData.data))
+                            dispatch(getCartList(responseData))
                         }
                     })
                     .catch((error) => {

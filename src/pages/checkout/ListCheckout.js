@@ -22,47 +22,50 @@ class ListCheckout extends Component {
     return (
         <View>
             {this.props.cart ? 
-                <List>
-                    {this.props.cart.map((data) => {
-                        return (
-                            <ListItem thumbnail key={data.id}>
-                                <Left>
-                                    <Thumbnail square source={{ uri: data.product.image }} />
-                                </Left>
-                                <Body>
-                                    <Text>{data.product.name}</Text>
-                                    <Text note numberOfLines={1}>{data.total_price_per_product}</Text>
-                                    <Text note numberOfLines={1}>Qty : {data.qty}</Text>
-                                </Body>
-                                <Right>
-                                    <Button transparent onPress={() => this.onPressDelete(data.id)}>
-                                        <Icon size={30} style={{fontSize: 30, color: '#95a5a6'}} name='ios-trash' />
-                                    </Button>
-                                </Right>
-                            </ListItem>
-                        )
-                    })}
-                </List>
+                <View>
+                    <List>
+                        {this.props.cart.data.map((data) => {
+                            return (
+                                <ListItem thumbnail key={data.id}>
+                                    <Left>
+                                        <Thumbnail square source={{ uri: data.product.image }} />
+                                    </Left>
+                                    <Body>
+                                        <Text>{data.product.name}</Text>
+                                        <Text note numberOfLines={1}>{data.total_price_per_product}</Text>
+                                        <Text note numberOfLines={1}>Qty : {data.qty}</Text>
+                                    </Body>
+                                    <Right>
+                                        <Button transparent onPress={() => this.onPressDelete(data.id)}>
+                                            <Icon size={30} style={{fontSize: 30, color: '#95a5a6'}} name='ios-trash' />
+                                        </Button>
+                                    </Right>
+                                </ListItem>
+                            )
+                        })}
+                    </List>
+                    <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15}}>
+                        <Text style={{fontWeight : 'bold'}}>Total</Text>
+                        <Text>{this.props.cart.total_price_cart}</Text>
+                    </View>
+                    <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 25}}>
+                        <Text style={{fontWeight : 'bold'}}>Detail Pemesan</Text>
+                    </View>
+                    <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 15}}>
+                        <Text style={{fontWeight : 'bold'}}>Nama</Text>
+                        <Text>Ari Putra</Text>
+                    </View>
+                    <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 5}}>
+                        <Text style={{fontWeight : 'bold'}}>Alamat</Text>
+                        <Text>Rp 1234567</Text>
+                    </View>
+                </View>
             :
                 <View style={{flex : 1, justifyContent : 'center', alignItems: 'center'}}> 
                     <Text> Keranjang Belanja Kosong </Text>
                 </View>
             }
-            <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15}}>
-                <Text style={{fontWeight : 'bold'}}>Total</Text>
-                <Text>Rp 1234567</Text>
-            </View>
-            <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 25}}>
-                <Text style={{fontWeight : 'bold'}}>Detail Pemesan</Text>
-            </View>
-            <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 15}}>
-                <Text style={{fontWeight : 'bold'}}>Nama</Text>
-                <Text>Ari Putra</Text>
-            </View>
-            <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 5}}>
-                <Text style={{fontWeight : 'bold'}}>Alamat</Text>
-                <Text>Rp 1234567</Text>
-            </View>
+            
         </View>
     );
   }
@@ -83,7 +86,7 @@ const mapDispatchToProps = (dispatch) => {
             .then((response) => response.json())
             .then((responseData) => {
                 if(responseData.status) {
-                    dispatch(getCartList(responseData.data))
+                    dispatch(getCartList(responseData))
                 }
             })
             .catch((error) => {
@@ -101,7 +104,7 @@ const mapDispatchToProps = (dispatch) => {
                     .then((response) => response.json())
                     .then((responseData) => {
                         if(responseData.status) {
-                            dispatch(getCartList(responseData.data))
+                            dispatch(getCartList(responseData))
                         }
                     })
                     .catch((error) => {

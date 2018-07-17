@@ -26,7 +26,6 @@ class Detail extends Component {
     }
 
     render() {
-        console.log(this.props.cart);
         return (
             <Container>
                 <Headermenu title="Dummy Produk" icon="arrow-back" cardbadge={this.props.cart ? this.props.cart.cart_badge : null} nav={ () => this.props.navigation.goBack()} navcart={ () => this.props.navigation.navigate('Cartpage') }/>
@@ -77,18 +76,6 @@ const mapStateToProps = state => {
     }
 }
 
-_getCartList = () => {
-    get('cart/list')
-    .then((response) => response.json())
-    .then((responseData) => {
-        if(responseData.success) {
-            dispatch(getCartList(responseData.data))
-        }
-    })
-    .catch((error) => {
-        console.log(error)
-    }) 
-}
 
 showNotification = (text, buttonText, position, type) => {
     Toast.show({
@@ -112,12 +99,25 @@ const mapDispatchToProps = (dispatch) => {
             })
         },
         addProductToCart : (data) => {
+            console.log(data)
             dispatch(onAddToCart())
             return post(data, 'product/addtocart')
             .then((response) => response.json())
             .then((responseData) => {
+                
                 if(responseData.status) {
-                    this._getCartList();
+                    _getCartList = () => {
+                        get('cart/list')
+                        .then((response) => response.json())
+                        .then((responseData) => {
+                            if(responseData.success) {
+                                dispatch(getCartList(responseData))
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                        }) 
+                    }
                 }
             })
             .then(() => dispatch(didAddToCart()))
@@ -131,7 +131,7 @@ const mapDispatchToProps = (dispatch) => {
             .then((responseData) => {
                 console.log(responseData)
                 if(responseData.success) {
-                    dispatch(getCartList(responseData.data))
+                    dispatch(getCartList(responseData))
                 }
             })
             .catch((error) => {
