@@ -3,8 +3,13 @@ import Listcheckout from './ListCheckout';
 import { Container, Content, Button, Text } from 'native-base';
 import Headermenu from '../component/HeaderComponent';
 import { connect } from 'react-redux';
+import { get } from '../../config/fetch';
 
 class Index extends Component {
+    _onPressCheckout()
+    {
+        this.props.onOrderProcess(this.props.navigation);
+    }
     render() {
         return (
             <Container>
@@ -12,7 +17,7 @@ class Index extends Component {
                 <Content>
                     <Listcheckout />
                     {this.props.profiledata.profile.address ?
-                    <Button block style={{marginTop : 15, marginBottom: 15}} >
+                    <Button block style={{marginTop : 15, marginBottom: 15}} onPress={ () => this._onPressCheckout() } >
                         <Text style={{fontWeight : 'bold', color : '#fff'}}>Bayar</Text>
                     </Button>
                     :
@@ -32,4 +37,19 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Index)
+const mapDispatchToProps = dispatch => {
+    return {
+        onOrderProcess : (url) => {
+            get('order/create')
+            .then((response) => response.json())
+            .then((reponseData) => {
+                if(reponseData.status) 
+                {
+                    url.navigate('Completepage');
+                }
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index)
