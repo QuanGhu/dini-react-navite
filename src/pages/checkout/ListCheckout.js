@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TextInput } from 'react-native';
 import { List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { getCartList } from '../../action/cart';
+import { changeAddress, changeName } from '../../action/order';
 import { get, remove } from '../../config/fetch';
 
 class ListCheckout extends Component {
@@ -18,7 +19,16 @@ class ListCheckout extends Component {
         this.props.removeItem(sendData);
     }
 
+    _changeName = (text) => {
+        this.props.onChangeName(text)
+    }
+
+    _changeAddress = (text) => {
+        this.props.onChangeAddress(text)
+    }
+
   render() {
+      console.log(this.props.order)
     return (
         <View>
             {this.props.cart ? 
@@ -52,12 +62,24 @@ class ListCheckout extends Component {
                         <Text style={{fontWeight : 'bold'}}>Detail Pemesan</Text>
                     </View>
                     <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 15}}>
-                        <Text style={{fontWeight : 'bold'}}>Nama</Text>
-                        <Text>{this.props.profiledata.profile.fullname}</Text>
+                        <Text style={{fontWeight : 'bold'}}>Nama Pemesan</Text>
+                        <TextInput
+                            editable={true}
+                            placeholder="Mohon Di Isi Dulu"
+                            style={{width : '60%'}}
+                            onChangeText={(value) => this._changeName(value)}
+                            value={this.props.order.name} />
                     </View>
                     <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 5}}>
                         <Text style={{fontWeight : 'bold'}}>Alamat</Text>
-                        <Text>{this.props.profiledata.profile.address}</Text>
+                        <TextInput
+                            editable={true}
+                            multiline={true}
+                            numberOfLines={3}
+                            style={{width : '80%'}}
+                            placeholder="Mohon Di Isi Dulu"
+                            onChangeText={(value) => this._changeAddress(value)}
+                            value={this.props.order.address} />
                     </View>
                 </View>
             :
@@ -77,6 +99,7 @@ const mapStateToProps = state => {
     return {
         cart : state.cart,
         profiledata : state.profiledata,
+        order : state.order
     }
 }
 
@@ -118,7 +141,9 @@ const mapDispatchToProps = (dispatch) => {
             .catch((error) => {
                 console.log(error)
             })
-        }
+        },
+        onChangeName : (text) => dispatch(changeName(text)),
+        onChangeAddress : (text) => dispatch(changeAddress(text))
     }
 }
 

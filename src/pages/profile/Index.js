@@ -47,7 +47,7 @@ class Index extends Component {
                                     <Text style={{fontWeight : 'bold', marginTop : 15, marginBottom : 30}}>{this.props.profiledata.profile.fullname}</Text>
                                 </View>
                                 <List>
-                                    <ListItem>
+                                    <ListItem button onPress={ () => this.props.navigation.navigate('Orderpage') }>
                                         <Left>
                                             <Text>Riwayat Pemesanan</Text>
                                         </Left>

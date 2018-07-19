@@ -5,6 +5,7 @@ import Product from './Product';
 import ProductDetail from './ProductDetail';
 import Profile from './Profile';
 import Cart from './Cart';
+import Order from './Order';
 
 export default combineReducers ({
     auth : Auth,
@@ -12,5 +13,6 @@ export default combineReducers ({
     products : Product,
     productdetail : ProductDetail,
     profiledata : Profile,
-    cart : Cart
+    cart : Cart,
+    order : Order
 })

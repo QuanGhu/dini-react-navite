@@ -9,6 +9,7 @@ import Register from './pages/profile/Register';
 import Reset from './pages/profile/Reset';
 import Login from './pages/profile/Login';
 import Complete from './pages/checkout/Complete';
+import Order from './pages/order/Index';
 import { StackNavigator } from 'react-navigation';
 
 const RootNav = StackNavigator(
@@ -22,7 +23,8 @@ const RootNav = StackNavigator(
         Resetpage : Reset,
         Loginpage : Login,
         Checkoutpage : Checkout,
-        Completepage : Complete
+        Completepage : Complete,
+        Orderpage : Order
     },
     {
         initialRouteName: 'Homepage',
