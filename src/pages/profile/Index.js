@@ -32,8 +32,6 @@ class Index extends Component {
     };
 
     render() {
-        console.log(this.props.profiledata.login);
-        console.log(this.props.profiledata);
         return (
             <Container>
                 {this.props.profiledata.login 
@@ -55,7 +53,7 @@ class Index extends Component {
                                             <Icon name="arrow-forward" />
                                         </Right>
                                     </ListItem>
-                                    <ListItem>
+                                    <ListItem button onPress={ () => this.props.navigation.navigate('Changepasswordpage') }>
                                         <Left>
                                             <Text>Ganti Password</Text>
                                         </Left>

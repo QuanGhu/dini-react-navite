@@ -34,7 +34,7 @@ class Login extends Component {
                 <View style={{flex : 1, alignItems : 'center', justifyContent : 'space-between', alignContent : 'center', backgroundColor : 'blue', alignSelf : 'stretch'}}>
                     <View style={{ flex : 1}}>
                         <Text style={{ backgroundColor: 'transparent', textAlign: 'center', fontSize: 30, padding: 40, color : '#fff'}}>
-                            Dini Shop
+                            Fashion Kid
                         </Text>
                     </View>
                     <View style={{ flex : 1, padding : 30, marginBottom : 45, alignSelf : 'stretch'}}>
