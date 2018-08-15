@@ -8,8 +8,8 @@ import { post } from '../../config/fetch';
 class Index extends Component {
     _onPressCheckout()
     {
-        const { name , address } = this.props.order;
-        const sendData = JSON.stringify({name, address})
+        const { name , address, payment_method, ongkir } = this.props.order;
+        const sendData = JSON.stringify({name, address, payment_method, ongkir})
         this.props.onOrderProcess(sendData, this.props.navigation);
     }
     render() {

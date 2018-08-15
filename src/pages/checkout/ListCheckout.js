@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { View, TextInput } from 'react-native';
-import { List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon } from 'native-base';
+import { List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon, Picker } from 'native-base';
 import { connect } from 'react-redux';
 import { getCartList } from '../../action/cart';
-import { changeAddress, changeName } from '../../action/order';
+import { changeAddress, changeName, changeMethod, changeOngkir } from '../../action/order';
 import { get, remove } from '../../config/fetch';
 
 class ListCheckout extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          selected: null
+        };
+    }
     componentWillMount()
     {
         this.props.getCartList();
@@ -25,6 +31,19 @@ class ListCheckout extends Component {
 
     _changeAddress = (text) => {
         this.props.onChangeAddress(text)
+    }
+
+    onValueChange(value) {
+        this.props.onChangeMethod(value)
+        if(value === 'transfer')
+        {
+            this.props.onChangeOngkir('35000')
+        } else {
+            this.props.onChangeOngkir('0')
+        }
+        this.setState({
+          selected: value
+        });
     }
 
   render() {
@@ -58,7 +77,11 @@ class ListCheckout extends Component {
                         <Text style={{fontWeight : 'bold'}}>Total</Text>
                         <Text>{this.props.cart.total_price_cart}</Text>
                     </View>
-                    <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 25}}>
+                    <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15}}>
+                        <Text style={{fontWeight : 'bold'}}>Ongkir</Text>
+                        <Text>{ this.state.selected == 'transfer' ? '35000' : '0'}</Text>
+                    </View>
+                    <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 25, borderBottom : '1px solid #000'}}>
                         <Text style={{fontWeight : 'bold'}}>Detail Pemesan</Text>
                     </View>
                     <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 15}}>
@@ -80,6 +103,21 @@ class ListCheckout extends Component {
                             placeholder="Mohon Di Isi Dulu"
                             onChangeText={(value) => this._changeAddress(value)}
                             value={this.props.order.address} />
+                    </View>
+                    <View style={{flex: 1, flexDirection : 'row', alignItems : 'center', justifyContent : 'space-between', padding : 15, marginTop : 5}}>
+                        <Text style={{fontWeight : 'bold'}}>Cara Bayar</Text>
+                        <Picker
+                            mode="dropdown"
+                            iosIcon={<Icon name="ios-arrow-down-outline" />}
+                            headerStyle={{ backgroundColor: "#b95dd3" }}
+                            headerBackButtonTextStyle={{ color: "#fff" }}
+                            headerTitleStyle={{ color: "#fff" }}
+                            selectedValue={this.state.selected}
+                            onValueChange={this.onValueChange.bind(this)}
+                        >
+                        <Picker.Item label="Cash On Delivery ( COD )" value="cod" />
+                        <Picker.Item label="Transfer" value="transfer" />
+                        </Picker>
                     </View>
                 </View>
             :
@@ -143,7 +181,9 @@ const mapDispatchToProps = (dispatch) => {
             })
         },
         onChangeName : (text) => dispatch(changeName(text)),
-        onChangeAddress : (text) => dispatch(changeAddress(text))
+        onChangeAddress : (text) => dispatch(changeAddress(text)),
+        onChangeMethod : (text) => dispatch(changeMethod(text)),
+        onChangeOngkir : (text) => dispatch(changeOngkir(text))
     }
 }
 

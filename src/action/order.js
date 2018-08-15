@@ -18,3 +18,17 @@ export const changeAddress = (data) => {
         data : data
     }
 }
+
+export const changeMethod = (data) => {
+    return {
+        type : 'change_method',
+        data : data
+    }
+}
+
+export const changeOngkir = (data) => {
+    return {
+        type : 'change_ongkir',
+        data : data
+    }
+}
