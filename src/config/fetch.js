@@ -72,3 +72,15 @@ export const remove = async (body, API) => {
     })
 }
 
+export const putImg = async (body, API) => {
+    var token = await AsyncStorage.getItem('token');
+    return fetch(API_URL + API, {
+        method : 'POST',
+        headers: {
+            'Authorization' : token,
+            'Content-Type': 'multipart/form-data',
+        },
+        body : body
+    })
+}
+
